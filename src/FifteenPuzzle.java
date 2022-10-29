@@ -28,6 +28,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setSize(500, 500);
         restart.addActionListener(this);
+        setTitle("Fifteen Puzzle Game");
         restart.setFont(new Font("Unispace", Font.PLAIN, 20));
     }
 
