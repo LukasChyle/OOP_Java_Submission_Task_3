@@ -28,8 +28,6 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         setPanel();
         setLocationRelativeTo(null);
         setSize(500, 500);
-        checkOrderWin(checkUnique, winOrder);
-
     }
 
     private void setPanel() {
@@ -45,7 +43,6 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         while (true) {
             Random random = new Random();
             int number = random.nextInt(16);
-
             if (checkNumber(number)) {
                 checkUnique.add(number);
                 return number;
@@ -67,7 +64,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
             for (int j = 0; j < board.length; j++) {
                 board[i][j] = new JButton(String.valueOf(getRandom()));
                 if (board[i][j].getText().equals("0")) {
-                    board[i][j].setBackground(Color.white);
+                    board[i][j].setBackground(new Color(255, 255, 255));
                     board[i][j].setText("");
                     board[i][j].setBorderPainted(false);
                 }
@@ -116,7 +113,10 @@ om restart knappen trycks kalla på newGame
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        checkOrderWin(checkUnique, winOrder);
+        if(checkOrderWin(checkUnique, winOrder)){
+            JOptionPane.showMessageDialog(null, "You solved it!");
+        }
     }
 
     public static void main(String[] args) {
