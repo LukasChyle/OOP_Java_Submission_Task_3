@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -68,7 +69,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         }
     }
 
-    private boolean checkNumber(int number){
+    private boolean checkNumber(int number) {
         for (int i : checkUnique) {
             if (i == number) {
                 return false;
@@ -81,11 +82,11 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         for (int i = 0; i < (board.length); i++) {
             for (int j = 0; j < board.length; j++) {
                 board[i][j] = new JButton(String.valueOf(getRandom()));
-                if(board[i][j].getText().equals("0")){
+                board[i][j].addActionListener(this);
+                if (board[i][j].getText().equals("0")) {
                     board[i][j].setBackground(Color.white);
                     board[i][j].setText("");
                     board[i][j].setBorderPainted(false);
-
                 }
             }
         }
@@ -119,8 +120,24 @@ Kör checkOrder för att se om pusslet är klart.
 om restart knappen trycks kalla på newGame
 */
 
+    private int[] getPosition(String text) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j].getText().equals(text)) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        int[] blankPosition = getPosition("");
+        int[] clickedPosition = getPosition(e.getActionCommand());
+
+
+
 
     }
 
