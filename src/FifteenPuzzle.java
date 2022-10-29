@@ -2,12 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class FifteenPuzzle extends JFrame implements ActionListener {
 
     private final JButton[][] board = new JButton[4][4];
     private final JButton restart = new JButton("Restart");
-    private final int[] checkUnique = new int[16];
+    private final List<Integer> checkUnique = new ArrayList<>();
     private final String[][] winOrder = {
             {"1", "2", "3", "4"},
             {"5", "6", "7", "8"},
@@ -26,7 +29,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
     }
 
-    private void setPanel(){
+    private void setPanel() {
         mainPanel.add(board[0][0]);
         mainPanel.add(board[0][1]);
         mainPanel.add(board[0][2]);
@@ -58,19 +61,31 @@ lägg in mainPanel i Jframe med borderlayout.SOUTH
 lägg in knapparna i mainPanel i rätt ordning.
 */
 
-/*
-getRandom:
-skapa en random int 0-15 (0 = blank ruta),
-itererar checkUnique för för att kontrollera om siffran redan används.
-- om redan finns hämta en ny siffra
-- om unik lägg till siffran i checkUnique och returnera siffran
-*/
+    private int getRandom() {
+        while (true) {
+            Random random = new Random();
+            int number = random.nextInt(16);
+
+            if (checkNumber(number)) {
+                checkUnique.add(number);
+                return number;
+            }
+        }
+    }
+
+    private boolean checkNumber(int number){
+        for (int i : checkUnique) {
+            if (i == number) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     private void setButtons() {
         for (int i = 0; i < (board.length); i++) {
             for (int j = 0; j < board.length; j++) {
-                // getRandom and put the text in the new JButton
-                board[i][j] = new JButton();
+                board[i][j] = new JButton(String.valueOf(getRandom()));
             }
         }
     }
