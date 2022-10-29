@@ -55,7 +55,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         mainPanel.add(board[3][3]);
     }
 
-
+    //svejs
 
     private int getRandom() {
         while (true) {
