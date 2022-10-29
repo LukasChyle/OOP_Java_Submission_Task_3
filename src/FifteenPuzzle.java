@@ -28,6 +28,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setSize(500, 500);
         restart.addActionListener(this);
+        restart.setFont(new Font("Unispace", Font.PLAIN, 20));
     }
 
     private void setPanel() {
@@ -64,6 +65,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         for (int i = 0; i < (board.length); i++) {
             for (int j = 0; j < board.length; j++) {
                 board[i][j] = new JButton(String.valueOf(getRandom()));
+                board[i][j].setFont(new Font("Impact", Font.PLAIN, 30));
                 board[i][j].addActionListener(this);
                 if (board[i][j].getText().equals("0")) {
                     setBlankButton(i, j);
