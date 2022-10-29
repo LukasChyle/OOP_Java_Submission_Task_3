@@ -112,7 +112,7 @@ om restart knappen trycks kalla på newGame
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        checkOrderWin(checkUnique, winOrder);
+
         if(checkOrderWin(checkUnique, winOrder)){
             JOptionPane.showMessageDialog(null, "You solved it!");
         }
