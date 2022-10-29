@@ -22,6 +22,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setButtons();
+        setPanel();
         setLocationRelativeTo(null);
     }
 
@@ -48,9 +49,6 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         mainPanel.add(board[3][1]);
         mainPanel.add(board[3][2]);
         mainPanel.add(board[3][3]);
-
-        // hello Lukas
-        
     }
 
 
