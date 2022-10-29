@@ -1,3 +1,5 @@
+import org.w3c.dom.css.RGBColor;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +20,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
             {"9", "10", "11", "12"},
             {"13", "14", "15", "0"}};
     private final JPanel mainPanel = new JPanel(new GridLayout(4, 4));
+    private final Color clickColor = new Color(33, 182, 168);
 
     private FifteenPuzzle() {
         add(mainPanel, BorderLayout.CENTER);
@@ -131,10 +134,26 @@ om restart knappen trycks kalla på newGame
         return null;
     }
 
+    private void resetColors(){
+        for (JButton[] jButtons : board) {
+            for (int j = 0; j < board.length; j++) {
+                if (!jButtons[j].getText().equals("")) {
+                    jButtons[j].setBackground(null);
+                }
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        int[] blankPosition = getPosition("");
-        int[] clickedPosition = getPosition(e.getActionCommand());
+        resetColors();
+        int[] blank = getPosition("");
+        int[] clicked = getPosition(e.getActionCommand());
+
+        if ((blank[0] == clicked[0] && (blank[1] == (clicked[1] - 1) || blank[1] == (clicked[1] + 1))) ||
+        (blank[1] == clicked[1] && (blank[0] == (clicked[0] - 1) || blank[0] == (clicked[0] + 1)))) {
+            board[clicked[0]][clicked[1]].setBackground(clickColor);
+        }
 
 
 
