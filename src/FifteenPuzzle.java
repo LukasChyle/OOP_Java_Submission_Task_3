@@ -10,7 +10,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     private String[][] winOrder = {{"1", "2", "3", "4"}, {"5", "6", "7", "8"}, {"9", "10", "11", "12"}, {"13", "14", "15", "0"}};
 
     private FifteenPuzzle() {
-
+        setButtons();
     }
 
 /*
@@ -27,11 +27,14 @@ itererar checkUnique för för att kontrollera om siffran redan används.
 - om unik lägg till siffran i checkUnique och returnera siffran
 */
 
-/*
-setButtons:
-Tilldelar alla buttons ett värde "setText()",
-nested for-loop för att komma åt alla knapparna och getRandom för att tilldela.
-*/
+    private void setButtons() {
+        for (int i = 0; i < (board.length); i++) {
+            for (int j = 0; j < board.length; j++) {
+                // getRandom and put the text in the new JButton
+                board[i][j] = new JButton();
+            }
+        }
+    }
 
 /*
 checkOrder:
