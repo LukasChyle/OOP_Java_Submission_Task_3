@@ -33,28 +33,11 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     }
 
     private void setPanel() {
-        mainPanel.add(board[0][0]);
-        mainPanel.add(board[0][1]);
-        mainPanel.add(board[0][2]);
-        mainPanel.add(board[0][3]);
-
-
-        mainPanel.add(board[1][0]);
-        mainPanel.add(board[1][1]);
-        mainPanel.add(board[1][2]);
-        mainPanel.add(board[1][3]);
-
-
-        mainPanel.add(board[2][0]);
-        mainPanel.add(board[2][1]);
-        mainPanel.add(board[2][2]);
-        mainPanel.add(board[2][3]);
-
-
-        mainPanel.add(board[3][0]);
-        mainPanel.add(board[3][1]);
-        mainPanel.add(board[3][2]);
-        mainPanel.add(board[3][3]);
+        for (JButton[] jButtons : board) {
+            for (int j = 0; j < board.length; j++) {
+                mainPanel.add(jButtons[j]);
+            }
+        }
     }
 
 
@@ -93,12 +76,10 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     }
 
 
-
-
     private boolean checkOrderWin(List<Integer> checkUnique, String[][] winOrder) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
-                if(!board[i][j].getText().equals(winOrder[i][j])){
+                if (!board[i][j].getText().equals(winOrder[i][j])) {
                     return false;
                 }
             }
