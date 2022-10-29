@@ -17,6 +17,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
             {"9", "10", "11", "12"},
             {"13", "14", "15", "0"}};
     private final JPanel mainPanel = new JPanel(new GridLayout(4, 4));
+    private final Color clickColor = new Color(33, 182, 168);
 
     private FifteenPuzzle() {
         add(mainPanel, BorderLayout.CENTER);
@@ -42,6 +43,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         while (true) {
             Random random = new Random();
             int number = random.nextInt(16);
+
             if (checkNumber(number)) {
                 checkUnique.add(number);
                 return number;
@@ -49,7 +51,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         }
     }
 
-    private boolean checkNumber(int number) {
+    private boolean checkNumber(int number){
         for (int i : checkUnique) {
             if (i == number) {
                 return false;
@@ -64,6 +66,9 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
                 board[i][j] = new JButton(String.valueOf(getRandom()));
                 if (board[i][j].getText().equals("0")) {
                     board[i][j].setBackground(new Color(255, 255, 255));
+                    board[i][j].addActionListener(this);
+                if (board[i][j].getText().equals("0")) {
+                    board[i][j].setBackground(Color.white);
                     board[i][j].setText("");
                     board[i][j].setBorderPainted(false);
                 }
@@ -97,6 +102,7 @@ checkUnique = new int[16];
 kalla på setButtons
 ta bort markering från knapp (kanske inte behövs)
 */
+
 /*
 Listener even:
 Markera knappen om den är bredvid "0"
@@ -110,8 +116,40 @@ Kör checkOrder för att se om pusslet är klart.
 om restart knappen trycks kalla på newGame
 */
 
+    private int[] getPosition(String text) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j].getText().equals(text)) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return null;
+    }
+
+    private void resetColors(){
+        for (JButton[] jButtons : board) {
+            for (int j = 0; j < board.length; j++) {
+                if (!jButtons[j].getText().equals("")) {
+                    jButtons[j].setBackground(null);
+                }
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        resetColors();
+        int[] blank = getPosition("");
+        int[] clicked = getPosition(e.getActionCommand());
+
+        if ((blank[0] == clicked[0] && (blank[1] == (clicked[1] - 1) || blank[1] == (clicked[1] + 1))) ||
+        (blank[1] == clicked[1] && (blank[0] == (clicked[0] - 1) || blank[0] == (clicked[0] + 1)))) {
+            board[clicked[0]][clicked[1]].setBackground(clickColor);
+        }
+
+
+
 
         if(checkOrderWin(checkUnique, winOrder)){
             JOptionPane.showMessageDialog(null, "You solved it!");
