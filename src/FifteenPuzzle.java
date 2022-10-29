@@ -11,6 +11,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
 
     private FifteenPuzzle() {
         setButtons();
+        setLocationRelativeTo(null);
     }
 
 /*
@@ -68,7 +69,7 @@ om restart knappen trycks kalla på newGame
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        setLocationRelativeTo(null);
     }
 
     public static void main(String[] args) {
