@@ -64,12 +64,16 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
                 board[i][j] = new JButton(String.valueOf(getRandom()));
                 board[i][j].addActionListener(this);
                 if (board[i][j].getText().equals("0")) {
-                    board[i][j].setBackground(new Color(255, 255, 255));
-                    board[i][j].setText("");
-                    board[i][j].setBorderPainted(false);
+                    setBlankButton(i, j);
                 }
             }
         }
+    }
+
+    private void setBlankButton(int i, int j) {
+        board[i][j].setBackground(new Color(255, 255, 255));
+        board[i][j].setText("");
+        board[i][j].setBorderPainted(false);
     }
 
     private boolean checkOrderWin() {
