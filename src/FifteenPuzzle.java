@@ -9,6 +9,7 @@ import java.util.Random;
 public class FifteenPuzzle extends JFrame implements ActionListener {
     private final JButton[][] board = new JButton[4][4];
     private List<Integer> checkUnique;
+    private final JButton restart;
     private final String[][] winOrder = {
             {"1", "2", "3", "4"},
             {"5", "6", "7", "8"},
@@ -18,7 +19,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     private final Color clickColor = new Color(33, 182, 168);
 
     private FifteenPuzzle() {
-        JButton restart = new JButton("Restart");
+        restart = new JButton("Restart");
         add(mainPanel, BorderLayout.CENTER);
         add(restart, BorderLayout.NORTH);
         setVisible(true);
