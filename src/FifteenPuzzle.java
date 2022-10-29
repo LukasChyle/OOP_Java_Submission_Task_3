@@ -9,7 +9,7 @@ import java.util.Random;
 public class FifteenPuzzle extends JFrame implements ActionListener {
     private final JButton[][] board = new JButton[4][4];
     private final JButton restart = new JButton("Restart");
-    private final List<Integer> checkUnique = new ArrayList<>();
+    private  List<Integer> checkUnique;
     private final String[][] winOrder = {
             {"1", "2", "3", "4"},
             {"5", "6", "7", "8"},
@@ -27,6 +27,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         setPanel();
         setLocationRelativeTo(null);
         setSize(500, 500);
+        restart.addActionListener(this);
     }
 
     private void setPanel() {
@@ -59,6 +60,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     }
 
     private void setButtons() {
+        checkUnique = new ArrayList<>();
         for (int i = 0; i < (board.length); i++) {
             for (int j = 0; j < board.length; j++) {
                 board[i][j] = new JButton(String.valueOf(getRandom()));
@@ -119,6 +121,7 @@ ta bort markering från knapp (kanske inte behövs)
     @Override
     public void actionPerformed(ActionEvent e) {
         resetColors();
+
         int[] blank = getPosition("");
         int[] clicked = getPosition(e.getActionCommand());
 
@@ -127,9 +130,13 @@ ta bort markering från knapp (kanske inte behövs)
             board[clicked[0]][clicked[1]].setBackground(clickColor);
         }
 
-
         if (checkOrderWin()) {
             JOptionPane.showMessageDialog(null, "You solved it!");
+        }
+
+        if(e.getSource().equals(restart)){
+            System.out.println(true);
+            setButtons();
         }
     }
 
