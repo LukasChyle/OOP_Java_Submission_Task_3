@@ -82,6 +82,12 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         for (int i = 0; i < (board.length); i++) {
             for (int j = 0; j < board.length; j++) {
                 board[i][j] = new JButton(String.valueOf(getRandom()));
+                if(board[i][j].getText().equals("0")){
+                    board[i][j].setBackground(Color.white);
+                    board[i][j].setText("");
+                    board[i][j].setBorderPainted(false);
+
+                }
             }
         }
     }
@@ -113,8 +119,6 @@ Kör checkOrder för att se om pusslet är klart.
 ------------------
 om restart knappen trycks kalla på newGame
 */
-
-// "0" knapp sätt setOasity "false";
 
     @Override
     public void actionPerformed(ActionEvent e) {
