@@ -112,9 +112,10 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource() == restart) {
-            setButtons();
+            FifteenPuzzle newGamePlus = new FifteenPuzzle();
+            newGamePlus.setLocationRelativeTo(this);
+            setVisible(false);
             return;
         }
 
