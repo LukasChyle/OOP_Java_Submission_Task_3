@@ -3,12 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class FifteenPuzzle extends JFrame implements ActionListener {
-
     private final JButton[][] board = new JButton[4][4];
+
     private final JButton restart = new JButton("Restart");
     private final List<Integer> checkUnique = new ArrayList<>();
     private final String[][] winOrder = {
@@ -27,6 +28,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         setPanel();
         setLocationRelativeTo(null);
         setSize(500, 500);
+        checkOrderWin(checkUnique, winOrder);
 
     }
 
@@ -68,7 +70,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         }
     }
 
-    private boolean checkNumber(int number){
+    private boolean checkNumber(int number) {
         for (int i : checkUnique) {
             if (i == number) {
                 return false;
@@ -81,14 +83,27 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         for (int i = 0; i < (board.length); i++) {
             for (int j = 0; j < board.length; j++) {
                 board[i][j] = new JButton(String.valueOf(getRandom()));
-                if(board[i][j].getText().equals("0")){
+                if (board[i][j].getText().equals("0")) {
                     board[i][j].setBackground(Color.white);
                     board[i][j].setText("");
                     board[i][j].setBorderPainted(false);
-
                 }
             }
         }
+    }
+
+
+
+
+    private boolean checkOrderWin(List<Integer> checkUnique, String[][] winOrder) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if(!board[i][j].getText().equals(winOrder[i][j])){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 /*
@@ -105,7 +120,6 @@ checkUnique = new int[16];
 kalla på setButtons
 ta bort markering från knapp (kanske inte behövs)
 */
-
 /*
 Listener even:
 Markera knappen om den är bredvid "0"
