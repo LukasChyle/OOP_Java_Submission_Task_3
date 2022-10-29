@@ -9,7 +9,7 @@ import java.util.Random;
 public class FifteenPuzzle extends JFrame implements ActionListener {
     private final JButton[][] board = new JButton[4][4];
     private List<Integer> checkUnique;
-    private final JButton restart;
+    private final JButton restart = new JButton("Restart");
     private final String[][] winOrder = {
             {"1", "2", "3", "4"},
             {"5", "6", "7", "8"},
@@ -19,7 +19,6 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     private final Color clickColor = new Color(33, 182, 168);
 
     private FifteenPuzzle() {
-        restart = new JButton("Restart");
         add(mainPanel, BorderLayout.CENTER);
         add(restart, BorderLayout.NORTH);
         setVisible(true);
@@ -113,7 +112,8 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(restart)) {
+
+        if (e.getSource() == restart) {
             setButtons();
             return;
         }
@@ -121,24 +121,25 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         int[] blank = getPosition("");
         int[] clicked = getPosition(e.getActionCommand());
 
-        if (blank[0] == clicked[0] && blank[1] == clicked[1]) {
-            for (int i = 0; i < board.length; i++) {
-                for (int j = 0; j < board.length; j++) {
-                    if (board[i][j].getBackground() == clickColor) {
-                        String number = board[i][j].getText();
-                        setBlankButton(i, j);
-                        board[blank[0]][blank[1]].setText(number);
-                        board[blank[0]][blank[1]].setBorderPainted(true);
+        if (blank != null && clicked != null) {
+            if (blank[0] == clicked[0] && blank[1] == clicked[1]) {
+                for (int i = 0; i < board.length; i++) {
+                    for (int j = 0; j < board.length; j++) {
+                        if (board[i][j].getBackground() == clickColor) {
+                            String number = board[i][j].getText();
+                            setBlankButton(i, j);
+                            board[blank[0]][blank[1]].setText(number);
+                            board[blank[0]][blank[1]].setBorderPainted(true);
+                        }
                     }
                 }
             }
-        }
-
-        if ((blank[0] == clicked[0] && (blank[1] == (clicked[1] - 1) || blank[1] == (clicked[1] + 1))) ||
-                (blank[1] == clicked[1] && (blank[0] == (clicked[0] - 1) || blank[0] == (clicked[0] + 1)))) {
-            resetColors();
-            board[clicked[0]][clicked[1]].setBackground(clickColor);
-            return;
+            if ((blank[0] == clicked[0] && (blank[1] == (clicked[1] - 1) || blank[1] == (clicked[1] + 1))) ||
+                    (blank[1] == clicked[1] && (blank[0] == (clicked[0] - 1) || blank[0] == (clicked[0] + 1)))) {
+                resetColors();
+                board[clicked[0]][clicked[1]].setBackground(clickColor);
+                return;
+            }
         }
         resetColors();
 
@@ -150,5 +151,4 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     public static void main(String[] args) {
         FifteenPuzzle game = new FifteenPuzzle();
     }
-
 }
