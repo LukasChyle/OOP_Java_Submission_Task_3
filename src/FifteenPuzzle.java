@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class FifteenPuzzle extends JFrame implements ActionListener {
     private final JButton[][] board = new JButton[4][4];
-    private final JButton restart = new JButton("Restart");
     private final List<Integer> checkUnique = new ArrayList<>();
     private final String[][] winOrder = {
             {"1", "2", "3", "4"},
@@ -19,6 +18,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     private final Color clickColor = new Color(33, 182, 168);
 
     private FifteenPuzzle() {
+        JButton restart = new JButton("Restart");
         add(mainPanel, BorderLayout.CENTER);
         add(restart, BorderLayout.NORTH);
         setVisible(true);
@@ -87,14 +87,6 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         return true;
     }
 
-/*
-newGame:
-board = new JButton[4][4];
-checkUnique = new int[16];
-kalla på setButtons
-ta bort markering från knapp (kanske inte behövs)
-*/
-
     private int[] getPosition(String text) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
@@ -118,15 +110,31 @@ ta bort markering från knapp (kanske inte behövs)
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        resetColors();
         int[] blank = getPosition("");
         int[] clicked = getPosition(e.getActionCommand());
 
-        if ((blank[0] == clicked[0] && (blank[1] == (clicked[1] - 1) || blank[1] == (clicked[1] + 1))) ||
-                (blank[1] == clicked[1] && (blank[0] == (clicked[0] - 1) || blank[0] == (clicked[0] + 1)))) {
-            board[clicked[0]][clicked[1]].setBackground(clickColor);
-        }
+        if (blank != null && clicked != null) {
+            if (blank[0] == clicked[0] && blank[1] == clicked[1]) {
+                for (int i = 0; i < board.length; i++) {
+                    for (int j = 0; j < board.length; j++) {
+                        if (board[i][j].getBackground() == clickColor) {
+                            String number = board[i][j].getText();
+                            setBlankButton(i, j);
+                            board[blank[0]][blank[1]].setText(number);
+                            board[blank[0]][blank[1]].setBorderPainted(true);
+                        }
+                    }
+                }
+            }
 
+            if ((blank[0] == clicked[0] && (blank[1] == (clicked[1] - 1) || blank[1] == (clicked[1] + 1))) ||
+                    (blank[1] == clicked[1] && (blank[0] == (clicked[0] - 1) || blank[0] == (clicked[0] + 1)))) {
+                resetColors();
+                board[clicked[0]][clicked[1]].setBackground(clickColor);
+                return;
+            }
+        }
+        resetColors();
 
         if (checkOrderWin()) {
             JOptionPane.showMessageDialog(null, "You solved it!");
@@ -136,5 +144,4 @@ ta bort markering från knapp (kanske inte behövs)
     public static void main(String[] args) {
         FifteenPuzzle game = new FifteenPuzzle();
     }
-
 }
