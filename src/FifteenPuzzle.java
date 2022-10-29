@@ -7,7 +7,8 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     private JButton[][] board = new JButton[4][4];
     private JButton restart = new JButton("Restart");
     private int[] checkUnique = new int[16];
-    private String[] winOrder = {"1", "2","3","4","5", "6","7","8","9", "10","11","12","13", "14","15","0"};
+    private String[][] winOrder = {{"1", "2", "3", "4"}, {"5", "6", "7", "8"}, {"9", "10", "11", "12"}, {"13", "14", "15", "0"}};
+
     private FifteenPuzzle() {
 
     }
