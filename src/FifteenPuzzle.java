@@ -1,18 +1,55 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class FifteenPuzzle extends JFrame implements ActionListener {
 
-    private JButton[][] board = new JButton[4][4];
-    private JButton restart = new JButton("Restart");
-    private int[] checkUnique = new int[16];
-    private String[][] winOrder = {{"1", "2", "3", "4"}, {"5", "6", "7", "8"}, {"9", "10", "11", "12"}, {"13", "14", "15", "0"}};
+    private final JButton[][] board = new JButton[4][4];
+    private final JButton restart = new JButton("Restart");
+    private final int[] checkUnique = new int[16];
+    private final String[][] winOrder = {
+            {"1", "2", "3", "4"},
+            {"5", "6", "7", "8"},
+            {"9", "10", "11", "12"},
+            {"13", "14", "15", "0"}};
+    private final JPanel mainPanel = new JPanel(new GridLayout(4, 4));
 
     private FifteenPuzzle() {
+
+        setSize(500, 500);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setButtons();
         setLocationRelativeTo(null);
     }
+
+    private void setPanel(){
+        mainPanel.add(board[0][0]);
+        mainPanel.add(board[0][1]);
+        mainPanel.add(board[0][2]);
+        mainPanel.add(board[0][3]);
+
+
+        mainPanel.add(board[1][0]);
+        mainPanel.add(board[1][1]);
+        mainPanel.add(board[1][2]);
+        mainPanel.add(board[1][3]);
+
+
+        mainPanel.add(board[2][0]);
+        mainPanel.add(board[2][1]);
+        mainPanel.add(board[2][2]);
+        mainPanel.add(board[2][3]);
+
+
+        mainPanel.add(board[3][0]);
+        mainPanel.add(board[3][1]);
+        mainPanel.add(board[3][2]);
+        mainPanel.add(board[3][3]);
+    }
+
 
 /*
 lägg in reset button i Jframe med Borderlayout.NORTH
@@ -69,7 +106,7 @@ om restart knappen trycks kalla på newGame
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        setLocationRelativeTo(null);
+
     }
 
     public static void main(String[] args) {
