@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class FifteenPuzzle extends JFrame implements ActionListener {
 
@@ -16,14 +17,15 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     private final JPanel mainPanel = new JPanel(new GridLayout(4, 4));
 
     private FifteenPuzzle() {
-
-        setSize(500, 500);
-        setLocationRelativeTo(null);
+        add(mainPanel, BorderLayout.CENTER);
+        add(restart, BorderLayout.NORTH);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setButtons();
         setPanel();
         setLocationRelativeTo(null);
+        setSize(500, 500);
+
     }
 
     private void setPanel(){
@@ -52,16 +54,11 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     }
 
 
-/*
-lägg in reset button i Jframe med Borderlayout.NORTH
-lägg in mainPanel i Jframe med borderlayout.SOUTH
-lägg in knapparna i mainPanel i rätt ordning.
-*/
 
 /*
 getRandom:
 skapa en random int 0-15 (0 = blank ruta),
-itererar checkUnique för för att kontrollera om siffran redan används.
+itererar checkUnique för att kontrollera om siffran redan används.
 - om redan finns hämta en ny siffra
 - om unik lägg till siffran i checkUnique och returnera siffran
 */
@@ -78,8 +75,8 @@ itererar checkUnique för för att kontrollera om siffran redan används.
 /*
 checkOrder:
 kontrollera om siffrorna ligger i rätt ordning på knapparna "getText()"
-genom att iterera genom knapparna och gämföra mot motsvarande plats på winOrder
-om man vunnit gör en popuppruta med vinst och kalla sen på newGame
+genom att iterera genom knapparna och jämföra mot motsvarande plats på winOrder
+om man vunnit gör en pop up ruta med vinst och kalla sen på newGame
 /*
 
 /*
@@ -91,19 +88,19 @@ ta bort markering från knapp (kanske inte behövs)
 */
 
 /*
-listener even:
+Listener even:
 Markera knappen om den är bredvid "0"
 när man klickar på nästa knapp:
 - om knappen inte är "0" men också ligger bredvid "0", flytta över markeringen till nya knappen.
 - om knappen inte är "0" och inte ligger bredvid "0" släck markeringen på nuvarande.
 - om knappen ligger bredvid "0" byt plats på talen(texterna) och släck markering.
 
-kör checkOrder för att se om pusslet är klart.
+Kör checkOrder för att se om pusslet är klart.
 ------------------
 om restart knappen trycks kalla på newGame
 */
 
-// "0" knapp sätt setOpasity"false";
+// "0" knapp sätt setOasity "false";
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -113,4 +110,5 @@ om restart knappen trycks kalla på newGame
     public static void main(String[] args) {
         FifteenPuzzle game = new FifteenPuzzle();
     }
+
 }
