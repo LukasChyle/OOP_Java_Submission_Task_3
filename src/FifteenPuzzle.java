@@ -83,15 +83,15 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         board[i][j].setBorderPainted(false);
     }
 
-    private boolean checkOrderWin() {
+    private void checkOrderWin() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 if (!board[i][j].getText().equals(winOrder[i][j])) {
-                    return false;
+                    return;
                 }
             }
         }
-        return true;
+        JOptionPane.showMessageDialog(null, "You solved it!");
     }
 
     private int[] getPosition(String text) {
@@ -147,11 +147,8 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
                 return;
             }
         }
+        checkOrderWin();
         resetColors();
-
-        if (checkOrderWin()) {
-            JOptionPane.showMessageDialog(null, "You solved it!");
-        }
     }
 
     public static void main(String[] args) {
