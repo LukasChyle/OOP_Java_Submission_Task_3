@@ -10,6 +10,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     private final JButton[][] board = new JButton[4][4];
     private List<Integer> checkUnique;
     private final JButton restart = new JButton("Restart");
+    private final ImageIcon mainFrameIcon = new ImageIcon("bild3.png");
     private final String[][] winOrder = {
             {"1", "2", "3", "4"},
             {"5", "6", "7", "8"},
@@ -19,6 +20,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     private final Color clickColor = new Color(33, 182, 168);
 
     private FifteenPuzzle() {
+        setIconImage(mainFrameIcon.getImage());
         add(mainPanel, BorderLayout.CENTER);
         add(restart, BorderLayout.NORTH);
         setVisible(true);
@@ -28,7 +30,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setSize(500, 500);
         restart.addActionListener(this);
-        setTitle("Fifteen Puzzle Game");
+        setTitle("Puzzle Game");
         restart.setFont(new Font("Unispace", Font.PLAIN, 20));
     }
 
