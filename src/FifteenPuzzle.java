@@ -126,6 +126,7 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
             remove(mainPanel);
             setNewGame();
             revalidate();
+            checkOrderWin();
             return;
         }
 
