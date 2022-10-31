@@ -15,29 +15,40 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
             {"5", "6", "7", "8"},
             {"9", "10", "11", "12"},
             {"13", "14", "15", "0"}};
-    private final JPanel mainPanel = new JPanel(new GridLayout(4, 4));
+    private JPanel mainPanel;
     private final Color clickColor = new Color(33, 182, 168);
 
     private FifteenPuzzle() {
         ImageIcon mainFrameIcon = new ImageIcon("bild3.png");
         setIconImage(mainFrameIcon.getImage());
-        add(mainPanel, BorderLayout.CENTER);
+        setTitle("Puzzle Game");
+        setSize(500, 500);
+        setLocationRelativeTo(null);
+        setNewGame();
         add(restart, BorderLayout.NORTH);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setButtons();
-        setPanel();
-        setLocationRelativeTo(null);
-        setSize(500, 500);
         restart.addActionListener(this);
-        setTitle("Puzzle Game");
         restart.setFont(new Font("Unispace", Font.PLAIN, 20));
     }
 
-    private void setPanel() {
-        for (JButton[] jButtons : board) {
+    private void setNewGame() {
+        mainPanel = new JPanel(new GridLayout(4, 4));
+        setButtons();
+        setPanel();
+        add(mainPanel, BorderLayout.CENTER);
+    }
+
+    private void setButtons() {
+        checkUnique = new ArrayList<>();
+        for (int i = 0; i < (board.length); i++) {
             for (int j = 0; j < board.length; j++) {
-                mainPanel.add(jButtons[j]);
+                board[i][j] = new JButton(String.valueOf(getRandom()));
+                board[i][j].setFont(new Font("Impact", Font.PLAIN, 30));
+                board[i][j].addActionListener(this);
+                if (board[i][j].getText().equals("0")) {
+                    setBlankButton(i, j);
+                }
             }
         }
     }
@@ -63,24 +74,18 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
         return true;
     }
 
-    private void setButtons() {
-        checkUnique = new ArrayList<>();
-        for (int i = 0; i < (board.length); i++) {
-            for (int j = 0; j < board.length; j++) {
-                board[i][j] = new JButton(String.valueOf(getRandom()));
-                board[i][j].setFont(new Font("Impact", Font.PLAIN, 30));
-                board[i][j].addActionListener(this);
-                if (board[i][j].getText().equals("0")) {
-                    setBlankButton(i, j);
-                }
-            }
-        }
-    }
-
     private void setBlankButton(int i, int j) {
         board[i][j].setBackground(new Color(255, 255, 255));
         board[i][j].setText("");
         board[i][j].setBorderPainted(false);
+    }
+
+    private void setPanel() {
+        for (JButton[] jButtons : board) {
+            for (int j = 0; j < board.length; j++) {
+                mainPanel.add(jButtons[j]);
+            }
+        }
     }
 
     private void checkOrderWin() {
@@ -118,9 +123,9 @@ public class FifteenPuzzle extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == restart) {
-            FifteenPuzzle newGamePlus = new FifteenPuzzle();
-            newGamePlus.setLocationRelativeTo(this);
-            setVisible(false);
+            remove(mainPanel);
+            setNewGame();
+            revalidate();
             return;
         }
 
